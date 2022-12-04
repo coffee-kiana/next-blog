@@ -22,7 +22,7 @@ export default function Home({ allPostsData }) {
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {console.log(allPostsData)}
-          {allPostsData?.map(({ id, date, title }) => (
+          {/* {allPostsData?.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               {title}
               <br />
@@ -30,9 +30,9 @@ export default function Home({ allPostsData }) {
               <br />
               {date}
             </li>
-          ))}
-          {allPostsData?.map(({ name }, index) => (
-            <li className={utilStyles.listItem} key={index}>
+          ))} */}
+          {allPostsData?.map(({ sha, name }, index) => (
+            <li className={utilStyles.listItem} key={sha}>
               {name}
               {/* <br />
               {id}
@@ -48,25 +48,25 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
+  // return {
+  //   props: {
+  //     allPostsData,
+  //   },
+  // };
 
   // 支持async/await用法
   // try {
-  // const response = await axios.get(
-  //   "https://gitee.com/api/v5/repos/coffeegirl/test-data/contents/%2F?access_token=acd71d3f8fe43bcf58b556de87dca3fe"
-  // );
-  // console.log("111111");
-  // console.log(response.data);
+  const response = await axios.get(
+    "https://gitee.com/api/v5/repos/coffeegirl/test-data/contents/%2F?access_token=acd71d3f8fe43bcf58b556de87dca3fe"
+  );
+  console.log("111111");
+  console.log(response.data);
 
-  // return {
-  //   props: {
-  //     data: response.data,
-  //   },
-  // };
+  return {
+    props: {
+      allPostsData: response.data,
+    },
+  };
   // } catch (error) {
   //   console.error(error);
   // }
