@@ -21,7 +21,7 @@ export default function Home({ allPostsData }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {console.log(allPostsData)}
+          {/* {console.log(allPostsData)} */}
           {/* {allPostsData?.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               {title}
@@ -31,9 +31,9 @@ export default function Home({ allPostsData }) {
               {date}
             </li>
           ))} */}
-          {allPostsData?.map(({ sha, name }, index) => (
+          {allPostsData?.map(({ sha, path }, index) => (
             <li className={utilStyles.listItem} key={sha}>
-              {name}
+              {path}
               {/* <br />
               {id}
               <br />
@@ -48,26 +48,20 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  // return {
-  //   props: {
-  //     allPostsData,
-  //   },
-  // };
+  const response = await axios({
+    method: 'get',
+    // responseType: 'stream',
+    url: "https://gitee.com/api/v5/repos/coffeegirl/test-data/git/trees/master?access_token=acd71d3f8fe43bcf58b556de87dca3fe"
+  });
 
-  // 支持async/await用法
-  // try {
-  const response = await axios.get(
-    "https://gitee.com/api/v5/repos/coffeegirl/test-data/contents/%2F?access_token=acd71d3f8fe43bcf58b556de87dca3fe"
-  );
+
   console.log("111111");
+  console.log(response);
   console.log(response.data);
 
   return {
     props: {
-      allPostsData: response.data,
+      allPostsData: response.data.tree,
     },
   };
-  // } catch (error) {
-  //   console.error(error);
-  // }
 }
