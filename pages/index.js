@@ -47,8 +47,7 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   // const allPostsData = getSortedPostsData();
-  const response = getGitTreeData();
-
+  const response = await getGitTreeData();
   return {
     props: {
       allPostsData: response,
