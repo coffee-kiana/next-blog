@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../component/layout";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
-import axios from "axios";
+import { getGitTreeData } from "../lib/posts";
 
 export default function Home({ allPostsData }) {
   return (
@@ -47,21 +46,12 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  const response = await axios({
-    method: 'get',
-    // responseType: 'stream',
-    url: "https://gitee.com/api/v5/repos/coffeegirl/test-data/git/trees/master?access_token=acd71d3f8fe43bcf58b556de87dca3fe"
-  });
-
-
-  console.log("111111");
-  console.log(response);
-  console.log(response.data);
+  // const allPostsData = getSortedPostsData();
+  const response = getGitTreeData();
 
   return {
     props: {
-      allPostsData: response.data.tree,
+      allPostsData: response,
     },
   };
 }
