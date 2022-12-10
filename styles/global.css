@@ -17,10 +17,10 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+/* a:hover {
   color: palevioletred;
   text-decoration: underline;
-}
+} */
 
 /* a:visited {
   color: green;

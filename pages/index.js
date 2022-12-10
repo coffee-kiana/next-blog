@@ -2,6 +2,7 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../component/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getGitTreeData } from "../lib/posts";
+import Link from "next/link";
 
 export default function Home({ allPostsData }) {
   return (
@@ -32,11 +33,7 @@ export default function Home({ allPostsData }) {
           ))} */}
           {allPostsData?.map(({ sha, path }, index) => (
             <li className={utilStyles.listItem} key={sha}>
-              {path}
-              {/* <br />
-              {id}
-              <br />
-              {date} */}
+              <Link href={`/posts/${sha}`}>{path}</Link>
             </li>
           ))}
         </ul>
