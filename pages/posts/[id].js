@@ -12,12 +12,12 @@ export default function Post({ postData }) {
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{postData?.title}</title>
       </Head>
-      <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-      <div className={utilStyles.lightText}>{postData.date}</div>
+      <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
+      <div className={utilStyles.lightText}>{postData?.date}</div>
       <br />
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: postData?.contentHtml }} />
     </Layout>
   );
 }
@@ -44,7 +44,7 @@ export async function getStaticPaths() {
   const paths = await getGitAllId();
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
